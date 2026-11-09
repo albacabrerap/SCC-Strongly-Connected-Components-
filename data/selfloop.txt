@@ -1,0 +1,4 @@
+# Nodo con auto-bucle.
+# Todo el grafo es un solo SCC de tamaño 1.
+1 1
+0 0
