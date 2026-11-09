@@ -1,0 +1,7 @@
+.venv/
+build/
+out/
+cpp/build/
+*.o
+__pycache__/
+manim/manim.cfg.bak
