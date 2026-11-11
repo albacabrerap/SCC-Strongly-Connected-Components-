@@ -169,4 +169,3 @@ class DirectedGraph(VGroup):
     self.edges_dict[edge_key] = edge_mob
     self.edges_group.add(edge_mob)
     return edge_mob
-

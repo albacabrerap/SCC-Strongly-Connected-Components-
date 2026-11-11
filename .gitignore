@@ -1,7 +1,19 @@
+# Entorno de Python
 .venv/
-build/
-out/
-cpp/build/
-*.o
+.vscode/
 __pycache__/
-manim/manim.cfg.bak
+*.pyc
+
+# Archivos generados por Manim (Videos temporales, imágenes, textos)
+media/
+
+# Archivos de salida (Videos finales, JSON, partes)
+output/
+
+# Binario compilado de C++
+algorithm/tarjan
+*.o
+*.out
+
+# Archivos temporales del sistema
+.DS_Store

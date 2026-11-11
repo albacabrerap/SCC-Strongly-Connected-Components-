@@ -1,7 +1,0 @@
-# Ciclo completo de 4 nodos.
-# Todos los vértices pertenecen a un único SCC.
-4 4
-0 1
-1 2
-2 3
-3 0

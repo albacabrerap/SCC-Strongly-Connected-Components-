@@ -1,67 +1,104 @@
-# SCC Strongly Connected Components
+# SCC - Algoritmo de Tarjan (Visualización)
 
-Este repositorio se prepara para producir un video educativo animado sobre SCC (Strongly Connected Components) usando un enfoque trace-driven:
+## Integrantes
 
-- Implementación real del algoritmo de Tarjan en C++.
-- Emisión de trazas JSONL como fuente de verdad para la animación.
-- Render en Python + Manim Community por escenas.
-- Concat de clips finales en `out/final.mp4`.
+- Curso: CS2023
+- Integrantes: Javier y Alba Cabrera
 
-## Estado inicial
+## Descripción
 
-Este repositorio está en la fase de infraestructura y bootstrap del proyecto. La parte funcional de C++ y la animación se implementará progresivamente con commits lógicos.
+Este proyecto visualiza el algoritmo de Tarjan para encontrar componentes fuertemente conexas (SCC) en un grafo dirigido. Usa una arquitectura **Trace-Driven**: un programa en C++ ejecuta Tarjan y genera una traza en formato JSON; luego, las escenas de Manim escritas en Python leen esa traza para construir la animación paso a paso. Así, la visualización representa los eventos producidos por la ejecución del algoritmo.
 
-## Objetivo del proyecto
+## Estructura del Proyecto
 
-Explicar visualmente cómo funciona el algoritmo de Tarjan para encontrar componentes fuertemente conexos en un grafo dirigido, mostrando claramente la relación entre los valores de `disc`, `low`, la pila DFS y el criterio de cierre de un SCC.
+```text
+SCC-Strongly-Connected-Components-/
+├── algorithm/              # Implementación C++ de Tarjan y ejecutable generado
+│   └── tarjan.cpp
+├── animation/              # Escenas de Manim y utilidades para grafos
+│   ├── scene_00_title.py
+│   ├── scene_01_concept.py
+│   ├── scene_02_demo.py
+│   └── utils/
+│       └── graph.py
+├── inputs/                 # Grafos de entrada en formato .txt
+│   └── demo.txt
+├── media/                  # Archivos temporales generados por Manim
+├── output/                 # Traza JSON, partes y video final generados
+├── .gitignore
+├── README.md
+└── run.sh                  # Compila, renderiza y une las escenas
+```
 
-## Requisitos en Arch Linux
+## Requisitos e Instalación (Multi-SO)
 
-Para trabajar en Arch Linux con este proyecto, conviene seguir esta preparación inicial:
+Se necesita un compilador de C++ con soporte para C++17, Python, Manim Community, Cairo, Pango y FFmpeg. Sigue las instrucciones correspondientes a tu sistema operativo.
 
-1. Verificar si las dependencias del sistema están instaladas con `pacman -Q`.
-2. Si faltan paquetes, instalar los necesarios con `sudo pacman -S --needed ...`.
-3. Crear un entorno virtual local con `python -m venv .venv`.
-4. Activarlo y instalar la dependencia de Manim con `pip install manim`.
-5. Ejecutar el script idempotente `scripts/setup_arch.sh` para repetir el proceso de forma segura.
+### Arch Linux y distribuciones basadas en Arch
 
-Paquetes típicos recomendados en Arch:
-
-- `base-devel`, `gcc`, `cmake`, `make`
-- `python`, `python-pip`, `python-virtualenv`
-- `cairo`, `pango`, `pkgconf`, `harfbuzz`, `fribidi`
-- `ffmpeg`, `sox`
-- `git`, `openssl`, `mesa`
-
-## Preparación del entorno
+Instala los paquetes del sistema con:
 
 ```bash
-cd SCC-Strongly-Connected-Components-
+sudo pacman -S base-devel python python-pip cairo pango pkgconf ffmpeg
+```
+
+### Windows
+
+La opción recomendada es ejecutar el proyecto dentro de **WSL (Windows Subsystem for Linux)** y seguir allí las instrucciones de Linux. Alternativamente, instala Python y FFmpeg manualmente, por ejemplo, con Chocolatey o Scoop. Para ejecutar el flujo completo sin WSL, abre Git Bash o ejecuta manualmente los comandos de compilación, generación de traza, renderizado de escenas y concatenación que aparecen en `run.sh`; también necesitarás un compilador C++ compatible y las dependencias de Manim.
+
+### macOS
+
+Instala las dependencias con Homebrew:
+
+```bash
+brew install cairo pango ffmpeg python
+```
+
+También necesitas un compilador de C++17, disponible con las herramientas de línea de comandos de Xcode.
+
+## Entorno de Python
+
+Desde la raíz del repositorio, crea el entorno virtual:
+
+```bash
 python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
 ```
 
-## Script de setup
-
-El script `scripts/setup_arch.sh` es idempotente y se encarga de:
-
-- detectar si faltan paquetes del sistema,
-- instalarlos con `pacman` cuando corresponde,
-- crear el entorno virtual si no existe,
-- instalar las dependencias de Python desde `requirements.txt`,
-- compilar el proyecto C++ si el `Makefile` de `cpp` ya está disponible.
+Actívalo según tu sistema:
 
 ```bash
-bash scripts/setup_arch.sh
+# Linux y macOS
+source .venv/bin/activate
 ```
 
-## Flujo de trabajo previsto
+```powershell
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+```
 
-- Compilar C++: `make -C cpp`
-- Generar trazas: `make traces`
-- Renderizar escenas por partes: `make s04`
-- Concatenar: `make concat`
-- Output final: `out/final.mp4`
+```bat
+:: Windows Command Prompt
+.venv\Scripts\activate.bat
+```
 
-> La animación usa un preset de Manim `-qh` para que todas las escenas compartan resolución y formato compatibles con `ffmpeg concat -c copy`.
+Con el entorno activado, instala Manim:
+
+```bash
+pip install manim
+```
+
+## Uso / Renderizado
+
+En Linux o macOS, ejecuta desde la raíz del proyecto:
+
+```bash
+./run.sh
+```
+
+El script compila `algorithm/tarjan.cpp`, genera la traza en `output/traza.json`, renderiza las escenas y concatena los videos. En Windows sin WSL, ejecuta manualmente los comandos del script o usa Git Bash con las dependencias necesarias instaladas.
+
+El video final se guarda en `output/final.mp4`.
+
+## Nota de Git
+
+Las carpetas `media/` y `output/` se generan automáticamente durante el renderizado. Están incluidas en `.gitignore` porque contienen videos y otros archivos generados que pueden ocupar mucho espacio y no deben subirse al repositorio.
