@@ -3,11 +3,11 @@
 ## Integrantes
 
 - Curso: CS2023
-- Integrantes: Javier y Alba Cabrera
+- Integrantes: Javier Pariansullca, Alba Cabrera, Sebastián Falvy
 
 ## Descripción
 
-Este proyecto visualiza el algoritmo de Tarjan para encontrar componentes fuertemente conexas (SCC) en un grafo dirigido. Usa una arquitectura **Trace-Driven**: un programa en C++ ejecuta Tarjan y genera una traza en formato JSON; luego, las escenas de Manim escritas en Python leen esa traza para construir la animación paso a paso. Así, la visualización representa los eventos producidos por la ejecución del algoritmo.
+Este proyecto visualiza el algoritmo de Tarjan para encontrar componentes fuertemente conexas (SCC) en un grafo dirigido. Usa una arquitectura **Trace-Driven**. Primero, un programa en C++ ejecuta Tarjan y genera una traza en formato JSON; luego, las escenas de Manim escritas en Python leen esa traza para construir la animación paso a paso. De esta forma, la visualización representa los eventos producidos por la ejecución del algoritmo.
 
 ## Estructura del Proyecto
 
@@ -32,7 +32,8 @@ SCC-Strongly-Connected-Components-/
 
 ## Requisitos e Instalación (Multi-SO)
 
-Se necesita un compilador de C++ con soporte para C++17, Python, Manim Community, Cairo, Pango y FFmpeg. Sigue las instrucciones correspondientes a tu sistema operativo.
+Se necesita un compilador de C++ con soporte para C++17, Python, Manim Community, Cairo, Pango y FFmpeg. 
+Sigue las instrucciones correspondientes a tu sistema operativo.
 
 ### Arch Linux y distribuciones basadas en Arch
 
@@ -99,6 +100,5 @@ El script compila `algorithm/tarjan.cpp`, genera la traza en `output/traza.json`
 
 El video final se guarda en `output/final.mp4`.
 
-## Nota de Git
-
-Las carpetas `media/` y `output/` se generan automáticamente durante el renderizado. Están incluidas en `.gitignore` porque contienen videos y otros archivos generados que pueden ocupar mucho espacio y no deben subirse al repositorio.
+> [!NOTE]
+> Las carpetas `media/` y `output/` se generan automáticamente durante el renderizado. Están incluidas en `.gitignore` porque contienen videos y otros archivos generados que pueden ocupar mucho espacio y no deben subirse al repositorio.
