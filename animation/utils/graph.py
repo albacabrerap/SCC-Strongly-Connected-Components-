@@ -56,23 +56,34 @@ class DirectedGraph(VGroup):
       self.add_edge(u, v)
 
   def _calculate_layout(self, vertices, layout, scale):
-    positions = {}
-    n = len(vertices)
-    if n == 0:
+      positions = {}
+      n = len(vertices)
+      if n == 0:
+          return positions
+  
+      if layout == "horizontal":
+          start_x = -scale * (n - 1) / 2
+          for i, v in enumerate(vertices):
+              positions[v] = np.array([start_x + i * scale, 0, 0])
+  
+      elif layout == "vertical":
+          start_y = -scale * (n - 1) / 2
+          for i, v in enumerate(vertices):
+              positions[v] = np.array([0, start_y + i * scale, 0])
+  
+      elif layout == "circular":
+          # Círculo empezando abajo (nodo 0 en la base) y avanzando en sentido horario.
+          for i, v in enumerate(vertices):
+              angle = -PI / 2 - 2 * PI * i / n
+              positions[v] = np.array(
+                  [scale * np.cos(angle), scale * np.sin(angle), 0]
+              )
+  
+      else:
+          for v in vertices:
+              positions[v] = ORIGIN
+  
       return positions
-
-    if layout == "horizontal":
-      start_x = -scale * (n - 1) / 2
-      for i, v in enumerate(vertices):
-        positions[v] = np.array([start_x + i * scale, 0, 0])
-    elif layout == "vertical":
-      start_y = -scale * (n - 1) / 2
-      for i, v in enumerate(vertices):
-        positions[v] = np.array([0, start_y + i * scale, 0])
-    else:
-      for v in vertices:
-        positions[v] = ORIGIN
-    return positions
 
   def _create_node_mobject(self, v_id, position):
     circle = Circle(
