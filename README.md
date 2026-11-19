@@ -98,7 +98,12 @@ En Linux o macOS, ejecuta desde la raíz del proyecto:
 
 El script compila `algorithm/tarjan.cpp`, genera la traza en `output/traza.json`, renderiza las escenas y concatena los videos. En Windows sin WSL, ejecuta manualmente los comandos del script o usa Git Bash con las dependencias necesarias instaladas.
 
-El video final se guarda en `output/final.mp4`.
+## Video Completo
+
+Una vez ejecutado el script, el video final se guarda en `output/final.mp4`.
+
+Puede encontrar el video completo con voice over en youtube.
+- [Link de Youtube](https://youtu.be/fP4AE17Z7Uk)
 
 > [!NOTE]
 > Las carpetas `media/` y `output/` se generan automáticamente durante el renderizado. Están incluidas en `.gitignore` porque contienen videos y otros archivos generados que pueden ocupar mucho espacio y no deben subirse al repositorio.
