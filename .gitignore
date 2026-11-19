@@ -21,3 +21,6 @@ algorithm/tarjan
 .DS_Store
 Thumbs.db
 *.log
+
+algorithm/tarjan.exe
+algorithm/tarjan.pdb
