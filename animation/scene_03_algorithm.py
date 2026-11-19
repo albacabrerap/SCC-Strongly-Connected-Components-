@@ -11,9 +11,9 @@ from utils.captions import CaptionScene
 
 class S03Algorithm(CaptionScene):
     def construct(self):
-        title = Text("Algoritmo de Tarjan: la idea", font_size=40, color=BLUE_B).to_edge(UP)
+        title = Text("Algoritmo de Tarjan", font_size=40, color=BLUE_B).to_edge(UP)
         self.play(Write(title))
-        sub = Text("Una sola pasada de DFS con 3 ingredientes:", font_size=28, color=GRAY_A)
+        sub = Text("Una sola pasada de DFS donde se tiene:", font_size=28, color=GRAY_A)
         sub.next_to(title, DOWN, buff=0.4)
         self.play(FadeIn(sub))
 

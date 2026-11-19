@@ -21,10 +21,12 @@ class S02Concept(CaptionScene):
         # ---- 1. Definición ----
         title = Text("¿Qué es una componente fuertemente conexa?", font_size=38, color=BLUE_B).to_edge(UP)
         self.play(Write(title))
-        d1 = Text("SCC = conjunto MÁXIMO de vértices de un grafo dirigido\ntal que para todo par u, v del conjunto:",
+        d1 = Text("SCC = conjunto MAXIMAL de vértices de un grafo dirigido\ntal que para todo par u, v del conjunto:",
                   font_size=28, line_spacing=1.2)
+        self.wait(1)
         d2 = Text("u alcanza a v      y      v alcanza a u", font_size=34, color=GREEN_C)
-        d3 = Text("«alcanza» = existe un camino dirigido.  «Máximo» = no se puede agregar otro vértice.",
+        self.wait(1)
+        d3 = Text("«alcanza» = existe un camino dirigido.  «Maximal» = no se puede agregar otro vértice.",
                   font_size=22, color=GRAY_A)
         VGroup(d1, d2, d3).arrange(DOWN, buff=0.6).move_to(ORIGIN)
         self.play(FadeIn(d1, shift=UP * 0.2))
@@ -38,12 +40,12 @@ class S02Concept(CaptionScene):
                           node_radius=0.32, node_color=TEAL_A, edge_color=GRAY_B, fill_opacity=0.15)
         g.scale(1.25).move_to(ORIGIN + DOWN * 0.2)
         self.play(Create(g), self.say("¿Qué vértices se alcanzan mutuamente?", GRAY_A))
-        self.wait(1)
+        self.wait(6)
 
         cyc = [g.edges_dict[(0, 1)], g.edges_dict[(1, 2)], g.edges_dict[(2, 0)]]
         self.play(*[e.animate.set_color(YELLOW) for e in cyc],
                   self.say("0 → 1 → 2 → 0: desde cualquiera llegamos a los otros dos", YELLOW))
-        self.wait(1.5)
+        self.wait(3)
 
         anims = []
         for k, grp in enumerate(sccs):
@@ -53,9 +55,9 @@ class S02Concept(CaptionScene):
                       for u, v in edges if comp[u] == k and comp[v] == k]
         txt = f"{len(sccs)} SCC: " + "  ".join("{" + ",".join(map(str, sorted(s))) + "}" for s in sccs)
         self.play(*anims, self.say(txt, YELLOW))
-        self.wait(1.5)
+        self.wait(3)
         self.play(self.say("Un vértice solo (el 3) también es una SCC: se alcanza a sí mismo", GRAY_A))
-        self.wait(2.5)
+        self.wait(5)
 
         # ---- 3. Condensación: cada SCC colapsa a un nodo ----
         R = 0.6
@@ -72,7 +74,7 @@ class S02Concept(CaptionScene):
         for k, grp in enumerate(sccs):
             collapse += [g.vertices_dict[v].animate.move_to(centers[k]).set_opacity(0) for v in grp]
             collapse.append(FadeIn(supers[k]))
-        self.play(*collapse, self.say("Colapsamos cada SCC en un solo nodo...", WHITE), run_time=1.6)
+        self.play(*collapse, self.say("Colapsamos cada SCC en un solo nodo...", WHITE), run_time=3)
         self.remove(g)
 
         arrows = []
@@ -82,9 +84,9 @@ class S02Concept(CaptionScene):
             arrows.append(Arrow(centers[a] + d * R, centers[b] - d * R, buff=0,
                                 color=GRAY_B, stroke_width=5))
         self.play(*[Create(a) for a in arrows], self.say("...y obtenemos el grafo condensado: ¡siempre es un DAG!", YELLOW))
-        self.wait(2.5)
+        self.wait(5)
         self.play(self.say("Si hubiera un ciclo entre componentes, se fusionarían en una sola SCC", GRAY_A))
-        self.wait(2.5)
-        self.play(self.say("Instalación: C3, luego C2, luego C1 (orden topológico inverso)", GREEN_C))
         self.wait(3)
+        self.play(self.say("Instalación: C3, luego C2, luego C1 (orden topológico inverso)", GREEN_C))
+        self.wait(6)
         self.clear_all()

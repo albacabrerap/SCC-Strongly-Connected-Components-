@@ -20,8 +20,9 @@ class S01Motivation(CaptionScene):
             layout="horizontal", layout_scale=2.8, node_radius=0.5,
             node_color=TEAL_A, edge_color=GRAY_B, fill_opacity=0.15,
         )
-        self.wait(6)
+
         self.play(Create(chain))
+        self.wait(6)
         for v in ["C", "B", "A"]:
             self.play(chain.vertices_dict[v][0].animate.set_fill(GREEN_C, opacity=0.8), run_time=1)
         self.wait(4)
@@ -56,11 +57,11 @@ class S01Motivation(CaptionScene):
             FadeIn(lab1), FadeIn(lab2),
             self.say("Grupos de paquetes que se alcanzan mutuamente", YELLOW),
         )
-        self.wait(3)
+        self.wait(4)
         self.play(self.say("Objetivo: encontrar esos grupos (SCC) en tiempo lineal", YELLOW, 28))
-        self.wait(2)
+        self.wait(4)
         usos = Text("También se usa en: compiladores · 2-SAT · redes sociales · la web",
                     font_size=22, color=GRAY_A).next_to(self._cap, UP, buff=0.3)
         self.play(FadeIn(usos))
-        self.wait(3)
+        self.wait(5)
         self.clear_all()
